@@ -15,7 +15,7 @@ bun run index.js
 To docker deploy:
 
 ```bash
-docker build -t hikkalastfm
+docker build -t hikkalastfm .
 docker run -d --restart=always --name hikkalastfm hikkalastfm
 ```
 
