@@ -75,7 +75,10 @@ const main = async () => {
 
     if (!latestScrobble && userDescription == fallbackDescription) return;
 
-    if (latestScrobble) return setCurrentUserDescription(latestScrobble);
+    if (latestScrobble) {
+        if (userDescription == latestScrobble) return;
+        return setCurrentUserDescription(latestScrobble);
+    }
 
     if (!latestScrobble && userDescription != fallbackDescription) return setCurrentUserDescription(fallbackDescription);
 }
