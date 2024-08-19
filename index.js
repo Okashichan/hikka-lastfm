@@ -2,6 +2,7 @@ const apiKey = Bun.env.LASTFM_API_KEY;
 const username = Bun.env.LASTFM_USERNAME;
 const hikkaSecret = Bun.env.HIKKA_SECRET;
 const fallbackDescription = Bun.env.FALLBACK_DESCRIPTION;
+const updateInterval = Bun.env.UPDATE_INTERVAL;
 
 const getCurrentUserDescription = async () => {
     const url = 'https://api.hikka.io/user/me';
@@ -41,6 +42,8 @@ const setCurrentUserDescription = async (description) => {
         if (!res.ok) {
             throw new Error(`HTTP error! status: ${res.status}`);
         }
+
+        console.log('User description updated successfully with:', description);
     } catch (err) {
         console.error('Error updating the user description: ', err);
     }
@@ -78,4 +81,4 @@ const main = async () => {
 }
 
 main();
-setInterval(main, 1000 * 30);
+setInterval(main, 1000 * updateInterval);
