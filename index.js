@@ -63,7 +63,13 @@ const getLatestScrobble = async () => {
         const recentTracks = data.recenttracks.track;
         const latestTrack = Array.isArray(recentTracks) ? recentTracks[0] : recentTracks;
 
-        if (latestTrack['@attr']?.nowplaying) return `🎵 Зараз слухає: ${latestTrack.artist['#text']} - ${latestTrack.name} 🎶`;
+        if (latestTrack['@attr']?.nowplaying) {
+            const generalLink = `[${latestTrack.artist['#text']} - ${latestTrack.name}](https://www.last.fm/music/${latestTrack.artist['#text'].includes(' ') ? encodeURI(latestTrack.artist['#text']) : latestTrack.artist['#text']})`;
+            // const artistLink = `[${latestTrack.artist['#text']}](https://www.last.fm/music/${latestTrack.artist['#text']})`;
+            // const songLink = `[${latestTrack.name}](https://www.last.fm/music/${latestTrack.artist['#text']}/_/` + `${latestTrack.name})`;
+            // return 🎵 Зараз слухає: ${latestTrack.artist['#text']} - ${latestTrack.name} 🎶;
+            return `🎵 **Зараз слухає:** ${generalLink} 🎶`;
+        }
     } catch (err) {
         console.error('Error fetching the latest scrobble: ', err);
     }
